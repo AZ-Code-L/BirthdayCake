@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Happy Birthday Zech</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+		<div class="sign-board">
+			<p class="bday_text">HAPPY BIRTHDAY ZECH</p>
+		</div>
+	
+		
+	<div class="cake">
+	    <div class="plate"></div>
+	    <div class="layer layer-bottom"></div>
+	    <div class="layer layer-middle"></div>
+	    <div class="layer layer-top"></div>
+	    <div class="icing"></div>
+	    <div class="drip drip1"></div>
+	    <div class="drip drip2"></div>
+	    <div class="drip drip3"></div>
+	    <div class="candle" onclick="toggleCandle()">
+	        <div class="flame"></div>
+	    </div>
+
+		<div class="candle2" onclick="toggleCandle2()">
+	        <div class="flame2"></div>
+	    </div>
+
+		<div class="candle3" onclick="toggleCandle3()">
+			<div class="flame3"></div>
+		</div>
+		<button id="blowButton" onclick="hideAllFlames()">Make a Wish</button>	
+		</div>
+		</div>
+	</div>
+	
+
+	
+		
+
+    <audio id="myAudio">
+		<source src="bday.mp3" preload = "auto">
+	</audio>
+
+	 <audio id="myAudio2">
+		<source src="cheer.mp3" preload = "auto">
+	</audio>
+
+   	<script>
+
+		window.onload = function() {
+		alert("IMPORTANT TO READ!!!!!!!!")	
+		alert("Click On the Candles");
+		};
+
+
+
+        function toggleCandle() {
+            const flame = document.querySelector('.flame');
+            const audio = document.getElementById('myAudio');
+            // Toggle flame visibility
+            flame.style.display = (flame.style.display === 'none') ? 'none' : 'block';
+            // Play or pause audio
+            if (myAudio.paused) {
+				myAudio.volume = 0.1;
+                myAudio.play();
+            }
+
+			// Show the blow button after 5 seconds
+			setTimeout(function() {
+				document.getElementById('blowButton').style.display = 'block';
+			}, 8000);
+        }
+
+		function toggleCandle2() {
+			const flame2 = document.querySelector('.flame2');
+			flame2.style.display = (flame2.style.display === 'none') ? 'none' : 'block';
+		}
+
+		function toggleCandle3() {
+			const flame3 = document.querySelector('.flame3');
+			flame3.style.display = (flame3.style.display === 'none') ? 'none' : 'block';
+		}
+
+		function hideAllFlames() {
+			const allFlames = document.querySelectorAll('.flame, .flame2, .flame3');
+			allFlames.forEach(flame => {
+				flame.style.display = 'none';
+			});
+
+			if (myAudio2.paused) {
+				myAudio2.volume = 0.5;
+                myAudio2.play();
+            }
+			// Create confetti when flames are blown out
+			
+					// Create confetti when flames are blown out
+			createConfettiShower();
+		}
+
+		function createConfettiShower() {
+			const confettiCount = 50; // Number of confetti particles
+			const delayBetweenConfetti = 100; // Delay in milliseconds
+
+			for (let i = 0; i < confettiCount; i++) {
+				setTimeout(createConfetti, i * delayBetweenConfetti);
+			}
+
+				// Remove confetti after 10 seconds
+			setTimeout(removeConfetti, 10000);
+		}
+
+		function createConfetti() {
+			const confettiContainer = document.createElement('div');
+			confettiContainer.className = 'confetti';
+			const randomColorClass = `color${Math.floor(Math.random() * 5) + 1}`;
+			confettiContainer.classList.add(randomColorClass);
+			document.body.appendChild(confettiContainer);
+
+			// Randomize position and rotation
+			const randomX = Math.random() * window.innerWidth;
+			const randomRotation = Math.random() * 360;
+			confettiContainer.style.left = `${randomX}px`;
+			confettiContainer.style.transform = `rotate(${randomRotation}deg)`;
+
+			// Remove confetti after animation
+			confettiContainer.addEventListener('animationend', () => {
+				document.body.removeChild(confettiContainer);
+			});
+		}
+
+		function removeConfetti() {
+			const allConfetti = document.querySelectorAll('.confetti');
+			allConfetti.forEach(confetti => {
+				document.body.removeChild(confetti);
+			});
+		}
+
+    </script>
+
+</body>
+</html>
